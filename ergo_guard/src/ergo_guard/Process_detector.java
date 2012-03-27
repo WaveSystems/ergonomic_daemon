@@ -1,5 +1,5 @@
-import java.io.BufferedReader;
 package ergo_guard;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
@@ -56,15 +56,23 @@ public class Process_detector {
     catch(Exception e){
       e.printStackTrace();
     }
-  }
+    
+    public static boolean processActivation(){
+    // TODO code application logic here
+    File script = Process_detector.writeVbScript();
+    List<String> processes = Process_detector.excecuteScript(script);
+    String result = "";
 
-  public static List<String> listRunningProcesses() {
-    try {
-      file = Process_detector.writeVbScript();
-      Process_detector.excecuteScript(file);
-    }
-    catch(Exception e){
-      e.printStackTrace();
+    Iterator<String> it = processes.iterator();
+    int i = 0;
+    while (it.hasNext()) {
+      result += it.next() +",";
+      i++;
+      if (i==10) {
+        System.out.println("The process: " + result + "\n");
+        result += "\n";
+        i = 0;
+      }
     }
   }
 }
