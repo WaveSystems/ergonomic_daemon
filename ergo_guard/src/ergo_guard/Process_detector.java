@@ -38,45 +38,44 @@ public class Process_detector {
       }
   }
 
-//  public static List<String> executeScript(File script){
-//      try{
-//          List<String> processList = new ArrayList<String>();
-//          //Java ejecuta el script
-//          Process p = Runtime.getRuntime().exec("cscript //NoLogo " + script.getPath());
-//          System.out.println("This is the path: " + script.getPath() + "\n");
-//          BufferedReader input =
-//                  new BufferedReader
-//                  (new InputStreamReader(p.getInputStream()));
-//          
-//          //Java captura las lineas de informacion que proporciona el script
-//          String line;
-//          while ((line = input.readLine()) != null) {
-//              System.out.println("The process: " + line + "\n");
-//              processList.add(line);
-//          }
-//          input.close();
-//          return processList;
-//      }catch(Exception e){
-//          e.printStackTrace();
-//      }
-//  }
+  public static List<String> executeScript(String script){
+      try{
+          List<String> processList = new ArrayList<String>();
+          //Java ejecuta el script
+          Process p = Runtime.getRuntime().exec("cscript //NoLogo " + script);
+          BufferedReader input =
+                  new BufferedReader
+                  (new InputStreamReader(p.getInputStream()));
+          
+          //Java captura las lineas de informacion que proporciona el script
+          String line;
+          while ((line = input.readLine()) != null) {
+              System.out.println("This is the path: " + line + "\n");
+               processList.add(line);
+          }
+          input.close();
+          return processList;
+      }catch(Exception e){
+          e.printStackTrace();
+          return null;
+      }
+  }
   
   public static void processActivation(){
       // TODO code application logic here
       String script = Process_detector.writeVbScript();
-//      List<String> processes = process_detector.executeScript(script);
-//      String result = "";
-//      
-//      Iterator<String> it = processes.iterator();
-//      int i = 0;
-//      while (it.hasNext()) {
-//          result += it.next() +",";
-//          i++;
-//          if (i==10) {
-//              System.out.println("The process: " + result + "\n");
-//              result += "\n";
-//              i = 0;
-//          }
-//      }
+      List<String> processes = Process_detector.executeScript(script);
+      String result = "";
+      
+      Iterator<String> it = processes.iterator();
+      int i = 0;
+      while (it.hasNext()) {
+          result += it.next() +",";
+          i++;
+          if (i==10) {
+              result += "\n";
+              i = 0;
+          }
+      }
   }
 }
