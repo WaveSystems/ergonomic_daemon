@@ -16,7 +16,7 @@ import javax.swing.border.LineBorder;
 public class Notifications {
     
     private String alertText(){
-
+        //Esta funcion retorna una recomendacion
         String text[] = new String[] {
             "Gira un poco la cabeza sobre. " 
                 + " el cuello. Nunca fuerzes el movimiento, "
@@ -36,18 +36,29 @@ public class Notifications {
     }
     
     private Dimension alertPosition(){
-    Toolkit toolkit =  Toolkit.getDefaultToolkit ();
-    Dimension dim = toolkit.getScreenSize();
-    return dim;
+        //Se obtiene las dimenciones de la pantalla
+        Toolkit toolkit =  Toolkit.getDefaultToolkit ();
+        Dimension dim = toolkit.getScreenSize();
+        
+        return dim;
     }
     
     public static void printAlert(){
+        
         Notifications notify = new Notifications();
-        Font f = new Font("Tahoma", 0, 16);
         
-        JFrame alert = new JFrame("Notification");
+        //Esta variable se usara para modificar la fuente de los textos
+        Font f = new Font("Tahoma", Font.BOLD, 16);
         
+        //Se instancia un JFrame que se donde se despliegue la alerta
+        JFrame alert = new JFrame("Alerta");
+        
+        //Se genera el texto que tendra el JFrame
         JTextArea textAlert = new JTextArea(notify.alertText());
+        
+        //Se el dan ciertas propeidades como que WRAP, Font, Dimension
+        textAlert.setBackground(Color.black);
+        textAlert.setForeground(Color.white);
         textAlert.setWrapStyleWord(true);
         textAlert.setLineWrap(true);
         textAlert.setEditable(false);
@@ -57,10 +68,17 @@ public class Notifications {
         //Remove this for production
         alert.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        alert.setSize(400, 200);
+        //Se instancia la funcion que determina el tamano de pantalla
         Dimension position = notify.alertPosition();
+        
+        //Se dan propiedades al JFrame
+        alert.setSize(400, 200);
         alert.setLocation(position.width-320, 180);
-        alert.getContentPane().add(textAlert, BorderLayout.NORTH);
+        alert.getContentPane().add(textAlert, BorderLayout.CENTER);
+        
+      
+        
+        //Se despliega el JFrame
         alert.pack(); 
         alert.setVisible(true);
     }
