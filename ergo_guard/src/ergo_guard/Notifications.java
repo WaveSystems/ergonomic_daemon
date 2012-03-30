@@ -32,21 +32,27 @@ public class Notifications {
     return text[random.nextInt(5)];
     }
     
+    private Dimension alertPosition(){
+    Toolkit toolkit =  Toolkit.getDefaultToolkit ();
+    Dimension dim = toolkit.getScreenSize();
+    return dim;
+    }
+    
     public static void printAlert(){
         Notifications notify = new Notifications();
         
         JFrame alert = new JFrame("Notification");
         
-        alert.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
         JLabel textLabel = new JLabel(notify.alertText(),
                  SwingConstants.CENTER); 
-        textLabel.setPreferredSize(new Dimension(30, 10));
-         
+        textLabel.setPreferredSize(new Dimension(300, 100));
+        //Remove this for production
+        alert.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        alert.setSize(400, 200);
+        Dimension position = notify.alertPosition();
+        alert.setLocation(position.width-320, 180);
         alert.getContentPane().add(textLabel, BorderLayout.CENTER);
-        
         alert.pack(); 
-        
         alert.setVisible(true);
     }
     
