@@ -10,6 +10,7 @@ public class Ergo_guard {
   private Ergo_guard() {;}
 
   public static void main(String[] args) {
-    Process_detector.processActivation();
+    //Process_detector.processActivation();
+      Notifications.printAlert();
   }
 }
