@@ -9,8 +9,11 @@ public class Ergo_guard {
     
   private Ergo_guard() {;}
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws InterruptedException {
     //Process_detector.processActivation();
+    
+    for(int x = 0; x < 10; x++){
       Notifications.printAlert();
+    }
   }
 }

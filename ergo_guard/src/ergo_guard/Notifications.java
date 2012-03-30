@@ -5,6 +5,8 @@
 package ergo_guard;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -43,7 +45,7 @@ public class Notifications {
         return dim;
     }
     
-    public static void printAlert(){
+    public static void printAlert() throws InterruptedException{
         
         Notifications notify = new Notifications();
         
@@ -51,20 +53,25 @@ public class Notifications {
         Font f = new Font("Tahoma", Font.BOLD, 16);
         
         //Se instancia un JFrame que se donde se despliegue la alerta
-        JFrame alert = new JFrame("Alerta");
+        final JFrame alert = new JFrame("Alerta");
+        
+        //Gives margin for the JTexTArea
+        UIManager.put("TextArea.margin", new Insets(10,10,10,10));
         
         //Se genera el texto que tendra el JFrame
         JTextArea textAlert = new JTextArea(notify.alertText());
         
+        Color coulor = new Color(46,46,46);
+        
         //Se el dan ciertas propeidades como que WRAP, Font, Dimension
-        textAlert.setBackground(Color.black);
-        textAlert.setForeground(Color.white);
+        textAlert.setBackground(coulor);   
+        textAlert.setForeground(Color.white);   //Set text color
         textAlert.setWrapStyleWord(true);
         textAlert.setLineWrap(true);
         textAlert.setEditable(false);
-        textAlert.setPreferredSize(new Dimension(300, 100));
+        textAlert.setPreferredSize(new Dimension(300, 120));
         textAlert.setFont(f);
-             
+        
         //Remove this for production
         alert.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -72,15 +79,21 @@ public class Notifications {
         Dimension position = notify.alertPosition();
         
         //Se dan propiedades al JFrame
-        alert.setSize(400, 200);
+        alert.setSize(400, 600);
         alert.setLocation(position.width-320, 180);
-        alert.getContentPane().add(textAlert, BorderLayout.CENTER);
+        alert.setUndecorated(true);     //Remove border
         
-      
+        //Se le pasa elJText al JFrame
+        alert.getContentPane().add(textAlert, BorderLayout.CENTER);
         
         //Se despliega el JFrame
         alert.pack(); 
         alert.setVisible(true);
+        
+        //Elimina la alerta despues de 5 segundos
+        Thread.sleep (5000);
+        alert.setVisible (false);
+        alert.dispose();
     }
     
 }
