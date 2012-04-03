@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -24,17 +25,28 @@ public class Exercises extends JFrame {
     public Exercises() {
 
         super("Hagamos ejercicio!!");
+        
+        String text[] = new String[] {
+            "imgs/background/zen_1.jpg",
+            "imgs/background/zen_2.jpg",
+            "imgs/background/zen_3.jpg",
+            "imgs/background/zen_4.jpg",
+            "imgs/background/zen_5.jpg"};
+        
+        Random random = new Random();
 
+        final String imgBg = text[random.nextInt(5)];;
+        
         con = getContentPane();
         
         con.setLayout(null);
-        ImageIcon imh = new ImageIcon("imgs/zen_1.jpg");
+        ImageIcon imh = new ImageIcon(imgBg);
         setSize(800, 600);
         
         panelBgImg = new JPanel(){
             
             public void paintComponent(Graphics g){
-                Image img = new ImageIcon("imgs/zen_1.jpg").getImage();
+                Image img = new ImageIcon(imgBg).getImage();
                 Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
                 setPreferredSize(size);
                 setMinimumSize(size);
@@ -71,6 +83,7 @@ public class Exercises extends JFrame {
         
         setResizable(false);
     }
+    
     
     private Dimension exercisePosition(){
         //Se obtiene las dimenciones de la pantalla
