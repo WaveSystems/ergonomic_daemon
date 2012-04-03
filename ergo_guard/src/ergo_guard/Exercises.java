@@ -31,10 +31,9 @@ public class Exercises extends JFrame {
         ImageIcon imh = new ImageIcon("imgs/zen_1.jpg");
         setSize(800, 600);
         
-        panelBgImg = new JPanel()
-        {
-            public void paintComponent(Graphics g) 
-            {
+        panelBgImg = new JPanel(){
+            
+            public void paintComponent(Graphics g){
                 Image img = new ImageIcon("imgs/zen_1.jpg").getImage();
                 Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
                 setPreferredSize(size);
@@ -52,22 +51,26 @@ public class Exercises extends JFrame {
         GridBagLayout layout = new GridBagLayout();
         
         JPanel panelContent = new JPanel(layout);
-        GridBagConstraints gc = new GridBagConstraints();
-
-        gc.insets = new Insets(3, 3, 3, 3);
-        gc.gridx = 1;
-        gc.gridy = 1;
         
-        JLabel label = new JLabel("Has pasado mucho tiempo en la computadora, momento"
-                + " de relajarnos un poco ");
-        panelContent.add(label, gc);
+        JTextArea label = new JTextArea("Has pasado mucho tiempo en la computadora,\n"
+                + "          momento de relajarnos un poco.");
+        
+        label.setWrapStyleWord(true);
+        label.setLineWrap(true);
+        label.setEditable(false);
+        label.setOpaque(false);
+        label.setPreferredSize(new Dimension(380, 40));
+        label.setFont(new Font("Tahoma", Font.BOLD, 16));
+        
+                
+        panelContent.add(label);
         
         panelBgImg.add(panelContent);
         
-        panelBgImg.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        panelBgImg.setLayout(new FlowLayout(FlowLayout.LEFT, 210, 50));
         
         setResizable(false);
-	}
+    }
     
     private Dimension exercisePosition(){
         //Se obtiene las dimenciones de la pantalla
@@ -77,22 +80,23 @@ public class Exercises extends JFrame {
         return dim;
     }
 
-	public static void createWindow() {
-            
-            final Exercises exercise = new Exercises();
-            
-		JFrame.setDefaultLookAndFeelDecorated(true);
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				Window w = new Exercises();
-				w.setVisible(true);
-				com.sun.awt.AWTUtilities.setWindowOpacity(w, 0.8f);
-                                
-                                Dimension position = exercise.exercisePosition();
-                                
-                                w.setLocation((position.width/2)-400, (position.height/2)-300);
-			}
-		});
-	}
+    public static void createWindow() {
+        
+        final Exercises exercise = new Exercises();
+        
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                Window w = new Exercises();
+                w.setVisible(true);
+                com.sun.awt.AWTUtilities.setWindowOpacity(w, 0.8f);
+                
+                Dimension position = exercise.exercisePosition();
+                
+                w.setLocation((position.width/2)-400, (position.height/2)-300);
+            }
+        });
+    }
 }
