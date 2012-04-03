@@ -26,6 +26,7 @@ public class Exercises extends JFrame {
 
         super("Hagamos ejercicio!!");
         
+        // Se crea el array que indica la ruta de los backgrounds
         String text[] = new String[] {
             "imgs/background/zen_1.jpg",
             "imgs/background/zen_2.jpg",
@@ -35,14 +36,17 @@ public class Exercises extends JFrame {
         
         Random random = new Random();
 
+        //Se decide cual background se utilizara mediante un random
         final String imgBg = text[random.nextInt(5)];;
         
         con = getContentPane();
         
+        //Se establece el fondo
         con.setLayout(null);
         ImageIcon imh = new ImageIcon(imgBg);
         setSize(800, 600);
         
+        //Se le da forma al fondo
         panelBgImg = new JPanel(){
             
             public void paintComponent(Graphics g){
@@ -57,6 +61,7 @@ public class Exercises extends JFrame {
             } 
         };
         
+        //Se agrega al JPanel
         con.add(panelBgImg);
         panelBgImg.setBounds(0, 0, imh.getIconWidth(), imh.getIconHeight());
         
@@ -64,6 +69,8 @@ public class Exercises extends JFrame {
         
         JPanel panelContent = new JPanel(layout);
         
+        
+        //Se construye leyenda del panel
         JTextArea label = new JTextArea("Has pasado mucho tiempo en la computadora,\n"
                 + "          momento de relajarnos un poco.");
         
@@ -74,7 +81,7 @@ public class Exercises extends JFrame {
         label.setPreferredSize(new Dimension(380, 40));
         label.setFont(new Font("Tahoma", Font.BOLD, 16));
         
-                
+        //SE agrega al JPAnel
         panelContent.add(label);
         
         panelBgImg.add(panelContent);
@@ -102,10 +109,12 @@ public class Exercises extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                //Se crea la ventana transparente
                 Window w = new Exercises();
                 w.setVisible(true);
                 com.sun.awt.AWTUtilities.setWindowOpacity(w, 0.8f);
                 
+                //Se le da posicion
                 Dimension position = exercise.exercisePosition();
                 
                 w.setLocation((position.width/2)-400, (position.height/2)-300);
