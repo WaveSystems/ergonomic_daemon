@@ -4,11 +4,11 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Process_detector {
+public class Process_detector extends Thread {
     
-  private Process_detector() {;}
+  public Process_detector() {;}
 
-  public static String writeVbScript(){
+  static String writeVbScript(){
       try{
       //Se crea el archivo vb script
       File script = new File("processes.vbs");
@@ -38,7 +38,7 @@ public class Process_detector {
       }
   }
 
-  public static List<String> executeScript(String script){
+  static List<String> executeScript(String script){
       try{
           List<String> processList = new ArrayList<String>();
           //Java ejecuta el script
@@ -50,7 +50,6 @@ public class Process_detector {
           //Java captura las lineas de informacion que proporciona el script
           String line;
           while ((line = input.readLine()) != null) {
-              System.out.println("This is the path: " + line + "\n");
                processList.add(line);
           }
           input.close();
@@ -61,7 +60,7 @@ public class Process_detector {
       }
   }
   
-  public static void processActivation(){
+  public void run(){
       // TODO code application logic here
       String script = Process_detector.writeVbScript();
       List<String> processes = Process_detector.executeScript(script);

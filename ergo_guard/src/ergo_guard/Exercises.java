@@ -17,7 +17,7 @@ import javax.swing.border.LineBorder;
  *
  * @author Alberto
  */
-public class Exercises extends JFrame {
+public class Exercises extends JFrame{
     
     Container con = null;
     JPanel panelBgImg;
@@ -70,7 +70,7 @@ public class Exercises extends JFrame {
         JPanel panelContent = new JPanel(layout);
         
         
-        //Se construye leyenda del panel
+//        //Se construye leyenda del panel
         JTextArea label = new JTextArea("Has pasado mucho tiempo en la computadora,\n"
                 + "          momento de relajarnos un poco.");
         
@@ -100,10 +100,13 @@ public class Exercises extends JFrame {
         return dim;
     }
 
-    public static void createWindow() {
+    static void createWindow() {
         
         final Exercises exercise = new Exercises();
         
+        //Se le da posicion
+        final Dimension position = exercise.exercisePosition();
+                
         JFrame.setDefaultLookAndFeelDecorated(true);
         
         SwingUtilities.invokeLater(new Runnable() {
@@ -114,11 +117,16 @@ public class Exercises extends JFrame {
                 w.setVisible(true);
                 com.sun.awt.AWTUtilities.setWindowOpacity(w, 0.8f);
                 
-                //Se le da posicion
-                Dimension position = exercise.exercisePosition();
-                
                 w.setLocation((position.width/2)-400, (position.height/2)-300);
             }
         });
+        
+        JFrame alert = new JFrame("Alerta");
+        
+        alert.setSize(400, 600);
+        alert.setLocation(position.width-320, 180);
+        alert.setUndecorated(true);     //Remove border
+        alert.pack(); 
+        alert.setVisible(true);
     }
 }

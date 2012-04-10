@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -16,7 +18,7 @@ import javax.swing.border.LineBorder;
  *
  * @author Alberto
  */
-public class Notifications {
+public class Notifications extends Thread {
     
     private String alertText(){
         //Esta funcion retorna una recomendacion
@@ -46,7 +48,7 @@ public class Notifications {
         return dim;
     }
     
-    public static void printAlert() throws InterruptedException{
+    public void run() {
         
         Notifications notify = new Notifications();
         
@@ -90,9 +92,12 @@ public class Notifications {
         //Se despliega el JFrame
         alert.pack(); 
         alert.setVisible(true);
-        
-        //Elimina la alerta despues de 5 segundos
-        Thread.sleep (5000);
+        try {
+            //Elimina la alerta despues de 5 segundos
+            Thread.sleep (5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Notifications.class.getName()).log(Level.SEVERE, null, ex);
+        }
         alert.setVisible (false);
         alert.dispose();
     }

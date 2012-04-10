@@ -10,11 +10,14 @@ public class Ergo_guard {
   private Ergo_guard() {;}
 
   public static void main(String[] args) throws InterruptedException {
-    //Process_detector.processActivation();
+      Thread pd = new Process_detector();
+      Thread nt = new Notifications();
+       
+      nt.start();
+      pd.start();
     
-//    for(int x = 0; x < 10; x++){
-//      Notifications.printAlert();
-//    }
+      
+    
       
       Exercises.createWindow();
   }
