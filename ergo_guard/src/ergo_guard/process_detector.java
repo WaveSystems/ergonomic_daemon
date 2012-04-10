@@ -66,15 +66,29 @@ public class Process_detector extends Thread {
       List<String> processes = Process_detector.executeScript(script);
       String result = "";
       
-      Iterator<String> it = processes.iterator();
-      int i = 0;
-      while (it.hasNext()) {
-          result += it.next() +",";
-          i++;
-          if (i==10) {
-              result += "\n";
-              i = 0;
+      
+      try{
+          // Open the file that is the first 
+          // command line parameter
+          FileInputStream fstream = new FileInputStream("config.txt");
+          // Get the object of DataInputStream
+          DataInputStream in = new DataInputStream(fstream);
+          BufferedReader br = new BufferedReader(new InputStreamReader(in));
+          String strLine;
+          //Read File Line By Line
+          while ((strLine = br.readLine()) != null)   {
+
+              Iterator<String> it = processes.iterator();
+              while (it.hasNext()) {
+                  if(strLine.equals(it.next())) {
+                      System.out.println("Found: " + strLine);
+                  }
+              }
           }
+          //Close the input stream
+          in.close();
+      }catch (Exception e){//Catch exception if any
+          System.err.println("Error: " + e.getMessage());
       }
   }
 }

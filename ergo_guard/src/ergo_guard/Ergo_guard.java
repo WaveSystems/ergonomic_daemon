@@ -13,12 +13,12 @@ public class Ergo_guard {
       Thread pd = new Process_detector();
       Thread nt = new Notifications();
        
-      nt.start();
+//      nt.start();
       pd.start();
     
       
     
       
-      Exercises.createWindow();
+//      Exercises.createWindow();
   }
 }

@@ -75,9 +75,6 @@ public class Notifications extends Thread {
         textAlert.setPreferredSize(new Dimension(300, 120));
         textAlert.setFont(f);
         
-        //Remove this for production
-        alert.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
         //Se instancia la funcion que determina el tamano de pantalla
         Dimension position = notify.alertPosition();
         
