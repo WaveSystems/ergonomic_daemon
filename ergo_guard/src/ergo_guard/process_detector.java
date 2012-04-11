@@ -62,33 +62,38 @@ public class Process_detector extends Thread {
   
   public void run(){
       // TODO code application logic here
+      Process_trace tracer = new Process_trace();
       String script = Process_detector.writeVbScript();
-      List<String> processes = Process_detector.executeScript(script);
-      String result = "";
       
       
-      try{
-          // Open the file that is the first 
-          // command line parameter
-          FileInputStream fstream = new FileInputStream("config.txt");
-          // Get the object of DataInputStream
-          DataInputStream in = new DataInputStream(fstream);
-          BufferedReader br = new BufferedReader(new InputStreamReader(in));
-          String strLine;
-          //Read File Line By Line
-          while ((strLine = br.readLine()) != null)   {
-
-              Iterator<String> it = processes.iterator();
-              while (it.hasNext()) {
-                  if(strLine.equals(it.next())) {
-                      System.out.println("Found: " + strLine);
+      for(;;){
+          List<String> processes = Process_detector.executeScript(script);
+          String result = "";
+          
+          try{
+              // Open the file that is the first 
+              // command line parameter
+              FileInputStream fstream = new FileInputStream("config.txt");
+              // Get the object of DataInputStream
+              DataInputStream in = new DataInputStream(fstream);
+              BufferedReader br = new BufferedReader(new InputStreamReader(in));
+              String strLine;
+              //Read File Line By Line
+              
+              while ((strLine = br.readLine()) != null){
+                  Iterator<String> it = processes.iterator();
+                  while (it.hasNext()) {
+                      if(strLine.equals(it.next())) {
+                          System.out.println("Found: " + strLine);
+                          tracer.processClassify(strLine);
+                      }
                   }
               }
+              //Close the input stream
+              in.close();
+          }catch (Exception e){//Catch exception if any
+              System.err.println("Error: " + e.getMessage());
           }
-          //Close the input stream
-          in.close();
-      }catch (Exception e){//Catch exception if any
-          System.err.println("Error: " + e.getMessage());
       }
   }
 }
