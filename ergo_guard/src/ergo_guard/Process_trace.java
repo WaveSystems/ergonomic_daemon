@@ -126,7 +126,33 @@ public class Process_trace {
         }
     }
     
-    public void processDown() {
+    public void processDown(List<String> procs) {
+        
+        ListIterator<process> proccs = processes.listIterator();
+        
+        int listC;
+        boolean exist = false;
  
+         while(proccs.hasNext()){
+            ListIterator<String> proc = procs.listIterator();
+             
+            process procc = proccs.next();
+            
+            exist = false;
+            
+            while(proc.hasNext()){
+                
+                String process = proc.next();
+                
+                if(!exist)
+                    if(process.equals(procc.getName()))
+                        exist = true;
+            }
+            
+            if(!exist){
+                System.out.println("Doesnt exist " + procc.getName());
+                proccs.remove();
+            }
+        }
     }
 }

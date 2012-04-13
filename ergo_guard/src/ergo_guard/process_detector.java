@@ -92,10 +92,10 @@ public class Process_detector extends Thread {
               
               if(!traced.isEmpty()){
                        tracer.processClassify(traced);
+                       tracer.processDown(traced);
                }
               
               tracer.processActive();
-              tracer.processDown();
               
               //Close the input stream
               in.close();
