@@ -85,7 +85,6 @@ public class Process_detector extends Thread {
                   Iterator<String> it = processes.iterator();
                   while (it.hasNext()) {
                       if(strLine.equals(it.next())) {
-//                          System.out.println("Found: " + strLine);
                           traced.add(strLine);
                       }
                   }
@@ -94,6 +93,10 @@ public class Process_detector extends Thread {
               if(!traced.isEmpty()){
                        tracer.processClassify(traced);
                }
+              
+              tracer.processActive();
+              tracer.processDown();
+              
               //Close the input stream
               in.close();
           }catch (Exception e){//Catch exception if any

@@ -111,4 +111,22 @@ public class Process_trace {
             }
         }
     }
+    
+    public void processActive() {
+        ListIterator<process> procs = processes.listIterator();
+        Calendar cal = Calendar.getInstance();
+        long temp;
+        
+        while(procs.hasNext()){
+            process procc = procs.next();
+            temp = cal.getTimeInMillis()/1000;
+            procc.setElapsed(temp);
+            procs.set(procc);
+            
+        }
+    }
+    
+    public void processDown() {
+ 
+    }
 }
