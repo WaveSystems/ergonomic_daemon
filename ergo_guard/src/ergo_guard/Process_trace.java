@@ -58,45 +58,57 @@ public class Process_trace {
     
     }
     
-    public void processClassify (String proc){
+    public void processClassify (List<String> procs){
         
         int size, cont, listC;
         boolean exist = false;
-        process procTracing = new process(proc);
-        process procc = new process(proc);
         
-        for(listC = 0; listC < processes.size(); listC ++){
-            procc = (process) processes.get(listC);
-            
-            if(proc.equals(procc.getName())){
-                exist = true;
-            } 
-        }
+        Iterator<String> proc = procs.iterator();
         
-        if(exist == false){
-            System.out.println("Added");
-            size = leisure.length;
-
-            for(cont = 0; cont < size; cont ++){
-                if(proc.equals(leisure[cont]))
-                    procTracing.setType("leisure");
+        while(proc.hasNext()){
+            String process = proc.next();
+            exist = false;
+            
+            process procc = new process(process);
+            
+            for(listC = 0; listC < processes.size(); listC ++){
+                procc = (process) processes.get(listC);
+                
+                if(process.equals(procc.getName())){
+                    exist = true;
+                } 
             }
             
-            size = entertainment.length;
-            
-            for(cont = 0; cont < size; cont ++){
-                if(proc.equals(entertainment[cont]))
-                    procTracing.setType("entertainment");
+            if(exist == false){
+                System.out.println("Added");
+                process procTracing = new process(process);
+                
+                size = leisure.length;
+                
+                for(cont = 0; cont < size; cont ++){
+                    if(process.equals(leisure[cont]))
+                        procTracing.setType("leisure");
+                }
+                
+                size = entertainment.length;
+                
+                for(cont = 0; cont < size; cont ++){
+                    if(process.equals(entertainment[cont]))
+                        procTracing.setType("entertainment");
+                }
+                
+                size = work.length;
+                
+                for(cont = 0; cont < size; cont ++){
+                    if(process.equals(work[cont]))
+                        procTracing.setType("work");
+                }
+                
+                System.out.println("This is the process to add: " + procTracing.getName());
+                System.out.println("This is the type of the process: " + procTracing.getType());
+                
+                processes.add(procTracing);
             }
-            
-            size = work.length;
-            
-            for(cont = 0; cont < size; cont ++){
-                if(proc.equals(work[cont]))
-                    procTracing.setType("work");
-            }
-            
-            processes.add(procTracing);
         }
     }
 }

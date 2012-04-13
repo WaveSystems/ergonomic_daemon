@@ -68,6 +68,7 @@ public class Process_detector extends Thread {
       
       for(;;){
           List<String> processes = Process_detector.executeScript(script);
+          List<String> traced = new ArrayList();
           String result = "";
           
           try{
@@ -84,11 +85,15 @@ public class Process_detector extends Thread {
                   Iterator<String> it = processes.iterator();
                   while (it.hasNext()) {
                       if(strLine.equals(it.next())) {
-                          System.out.println("Found: " + strLine);
-                          tracer.processClassify(strLine);
+//                          System.out.println("Found: " + strLine);
+                          traced.add(strLine);
                       }
                   }
               }
+              
+              if(!traced.isEmpty()){
+                       tracer.processClassify(traced);
+               }
               //Close the input stream
               in.close();
           }catch (Exception e){//Catch exception if any
