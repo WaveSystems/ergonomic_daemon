@@ -35,13 +35,12 @@ public class Exercises extends JFrame{
         //Se decide cual background se utilizara mediante un random
         String imgBg = zen[random.nextInt(5)];
         
-        Toolkit kit = Toolkit.getDefaultToolkit();
-        img = kit.getImage(imgBg);
+        img = Toolkit.getDefaultToolkit().createImage(imgBg);
         
         JPanel panel = new PicturePanel();
         JLabel legend = new JLabel("Has pasado mucho tiempo en la computadora");
         
-        legend.setOpaque(true);
+        legend.setOpaque(false);
         
         panel.add(legend);
         add(panel);
@@ -80,7 +79,7 @@ public class Exercises extends JFrame{
         
         
         exercise.setLocation((position.width/2)-400, (position.height/2)-300);
-//        exercise.pack();
+        exercise.pack();
         exercise.setVisible(true);
                 
     }
