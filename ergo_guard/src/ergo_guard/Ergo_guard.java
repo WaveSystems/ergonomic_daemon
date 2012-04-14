@@ -14,11 +14,11 @@ public class Ergo_guard {
       Thread nt = new Notifications();
        
 //      nt.start();
-      pd.start();
+//      pd.start();
     
       
     
       
-//      Exercises.createWindow();
+      Exercises.createWindow();
   }
 }
